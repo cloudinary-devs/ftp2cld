@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  s3bucketsync:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: main.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: >-
+        arn:aws:iam::365643640437:role/service-role/s3bucket_sync-role-nu1j1up5
+      Events:
+        BucketEvent1:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: Bucket1
+            Events:
+              - 's3:ObjectCreated:*'
+              - 's3:ObjectRemoved:*'
+              - !<tag:yaml.org,2002:js/undefined> ''
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: sync_cloudinary
+      Environment:
+        Variables:
+          CLOUDINARY_URL: cloudinary://123:abc@my_cloud/my_cloud-res.cloudinary.com?cname=my_cloud-res.cloudinary.com
+          cld_delivery_url: 'https://my_cloud-res.cloudinary.com'
+          cld_sync_root: s3_sync
+          s3_sync_root: sync_cloudinary
+          skip_reload_same_etag: 'false'
+  Bucket1:
+    Type: 'AWS::S3::Bucket'

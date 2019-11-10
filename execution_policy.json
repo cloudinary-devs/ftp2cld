@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:PutParameter",
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "ssm:GetParameter",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::my_bucket/sync_cloudinary",
+                "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "cloudwatch:PutMetricData",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
+                "ec2:DescribeTags",
+                "s3:HeadBucket",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
