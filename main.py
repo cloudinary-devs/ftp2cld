@@ -50,6 +50,7 @@ def helper_get_resource_type_from_extension(extension):
                         "tif", "tiff", "indd", "idml"]
     video_extentions = ["3g2", "3gp", "avi", "flv", "m2ts", "mov", "mkv", "mp4", "mpeg",
                            "ogv", "webm", "wmv", "aac", "aif", "aiff", "amr", "flac", "m4a", "mp3", "ts", "ogg", "wav"]
+    extension = extension.lower()
     # spell-checker:enable
     if (extension in image_extentions):
         resource_type = "image"
